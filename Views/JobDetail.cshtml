@@ -1,0 +1,16 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.JobDetail>
+@{
+    Layout = "Master.cshtml";
+
+    var id = HttpContextAccessor.HttpContext.Request.Query["id"];
+    var nodeId = Model.Id; 
+
+    if (!string.IsNullOrEmpty(id))
+    {
+
+        @await Component.InvokeAsync("Job",new { jobId =int.Parse(id) })
+
+    }
+}

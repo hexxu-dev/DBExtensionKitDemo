@@ -1,0 +1,92 @@
+﻿@using UmbracoCareer.Models
+
+@model JobListViewModel
+
+<div class="page">
+    <main class="site-main">
+        <div class="container">
+            <section class="section content-page">
+                <h1 class="page-title">Careers</h1>
+                <div class="omni-job-form-plugin-style">
+                    <div class="omni-filter-wrap">
+                        <form action="" method="POST">
+                            <div class="omni-filter-item-search">
+                                <div class="omni-filter-item-search-in">
+                                    <input type="text" value="" placeholder="Search" class="omni-job-form-control" name="param" id="param">
+                                    <span class="omni-job-search-icon-wrapper" onclick="loadResults(1)"><i class="omni-job-icon-search"></i></span>
+                                </div>
+                                <a href="#" class="omni-filter-toggle" role="button" aria-pressed="false">
+                                    <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" version="1.1" preserveAspectRatio="xMinYMin"><path xmlns="http://www.w3.org/2000/svg" fill="rgb(9.803922%,9.803922%,9.803922%)" d="M 36.417969 19.9375 L 36.417969 17.265625 C 36.417969 16.160156 35.523438 15.265625 34.417969 15.265625 L 21.578125 15.265625 C 20.476562 15.265625 19.578125 16.160156 19.578125 17.265625 L 19.578125 19.9375 L 11 19.9375 L 11 26.9375 L 19.578125 26.9375 L 19.578125 30.105469 C 19.578125 31.210938 20.476562 32.105469 21.578125 32.105469 L 34.417969 32.105469 C 35.523438 32.105469 36.417969 31.210938 36.417969 30.105469 L 36.417969 26.9375 L 89 26.9375 L 89 19.9375 Z M 58.421875 43.578125 C 58.421875 42.476562 57.527344 41.578125 56.421875 41.578125 L 43.582031 41.578125 C 42.480469 41.578125 41.582031 42.476562 41.582031 43.578125 L 41.582031 46.5 L 11 46.5 L 11 53.5 L 41.582031 53.5 L 41.582031 56.421875 C 41.582031 57.527344 42.480469 58.421875 43.582031 58.421875 L 56.421875 58.421875 C 57.527344 58.421875 58.421875 57.527344 58.421875 56.421875 L 58.421875 53.5 L 89 53.5 L 89 46.5 L 58.421875 46.5 Z M 80.417969 70.140625 C 80.417969 69.035156 79.523438 68.140625 78.417969 68.140625 L 65.578125 68.140625 C 64.476562 68.140625 63.578125 69.035156 63.578125 70.140625 L 63.578125 73.0625 L 11 73.0625 L 11 80.0625 L 63.578125 80.0625 L 63.578125 82.984375 C 63.578125 84.085938 64.476562 84.984375 65.578125 84.984375 L 78.417969 84.984375 C 79.523438 84.984375 80.417969 84.085938 80.417969 82.984375 L 80.417969 80.0625 L 89 80.0625 L 89 73.0625 L 80.417969 73.0625 Z M 80.417969 70.140625" /></svg>
+                                </a>
+                            </div>
+                            <div class="omni-filter-items">
+                                <div class="omni-filter-item">
+                                    <select name="jobCat" id="jobCat" class="job-select" aria-label="All Job Categories" onchange="loadResults(1)">
+                                        <option value="">All Job Categories</option>
+                                        @foreach (var item in Model.JobCategories)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="omni-filter-item">
+                                    <select name="jobType" id="jobType" class="job-select" aria-label="All Job Types" onchange="loadResults(1)">
+                                        <option value="">All Job Types</option>
+                                        @foreach (var item in Model.JobTypes)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+
+                                    </select>
+                                </div>
+                                <div class="omni-filter-item">
+                                    <select name="jobLoc" id="jobLoc" class="job-select" aria-label="All Job Locations" onchange="loadResults(1)">
+                                        <option value="">All Job Locations</option>
+                                        @foreach (var item in Model.JobLocations)
+                                        {
+                                            <option value="@item">@item</option>
+                                        }
+
+                                    </select>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="omni-job-listings @(Model.ListView ? "omni-lists":"omni-row omni-grid-col-3" )" id="jobList">
+                    </div>
+
+                </div>
+            </section>
+        </div>
+    </main><!-- #main -->
+</div>
+<script>
+    $(document).ready(function () {
+        $(".job-select").select2({
+            minimumResultsForSearch: Infinity,
+        })
+        loadResults(1);
+    });
+
+    function loadResults(page) {
+        $.ajax({
+            url: "/umbraco/surface/job/jobList",
+            contentType: 'application/html; charset=utf-8',
+            type: 'get',
+            dataType: 'html',
+            data: {
+                param: $("#param").val(),
+                cat: $("#jobCat").val(),
+                type: $("#jobType").val(),
+                loc: $("#jobLoc").val(),
+                page: page,
+                limit: '@Model.NumPerPage',
+                list: '@Model.ListView'
+            },
+            success: function (data) {
+                $('#jobList').html(data);
+            }
+        });
+    }
+</script>

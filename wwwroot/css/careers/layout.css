@@ -1,0 +1,573 @@
+/*!
+
+wpjob is based on Underscores https://underscores.me/, (C) 2012-2020 Automattic, Inc.
+Underscores is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal https://necolas.github.io/normalize.css/
+*/
+/*--------------------------------------------------------------
+>>> TABLE OF CONTENTS:
+----------------------------------------------------------------
+# Generic
+	- Normalize
+	- Box sizing
+# Base
+	- Typography
+	- Elements
+	- Links
+	- Forms
+## Layouts
+# Components
+	- Navigation
+	- Posts and pages
+	- Comments
+	- Widgets
+	- Media
+	- Captions
+	- Galleries
+# plugins
+	- Jetpack infinite scroll
+# Utilities
+	- Accessibility
+	- Alignments
+
+--------------------------------------------------------------*/
+
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-synthesis: none;
+	font-feature-settings: "kern";
+	-moz-font-feature-settings: 'kern';
+	-webkit-font-smoothing: antialiased;
+	word-break: break-word;
+}
+
+a, a:hover {
+	text-decoration: none;
+}
+
+.section {
+	padding-top: 6rem;
+	padding-bottom: 6rem;
+	overflow: hidden;
+}
+
+@media (max-width: 1199.98px) {
+	.section {
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+}
+
+.container, .container-sm, .container-md, .container-lg, .container-xl {
+	max-width: 1140px;
+}
+
+.section-in {
+	max-width: 1302px;
+	margin: 0px auto;
+	padding-top: 5rem;
+	padding-bottom: 5rem;
+}
+
+@media (max-width: 1199.98px) {
+	.section-in {
+		padding-top: 3.5rem;
+		padding-bottom: 3.5rem;
+	}
+}
+
+img {
+	max-width: 100%;
+	height: auto;
+	width: auto;
+}
+
+/**Button style**/
+.btn-brand {
+	padding: 1rem 2.4rem;
+	background: #060606;
+	color: #ffffff;
+	font-family: "CircularStdBlack", sans-serif;
+	border: 1px solid #060606;
+	box-shadow: rgba(6, 6, 6, 0.3) 0px 0px 19px;
+	border-radius: 45px;
+	transition: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-brand {
+		transition: none;
+	}
+}
+
+.btn-brand::before {
+	content: url("assets/wordpress-white.svg");
+	vertical-align: middle;
+	margin-right: 0.9rem;
+	transition: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-brand::before {
+		transition: none;
+	}
+}
+
+.btn-brand:hover {
+	color: #ffffff;
+	box-shadow: rgba(6, 6, 6, 0.7) 0px 0px 25px;
+}
+
+.btn-brand-w, #omni-application-submit-btn {
+	padding: 1rem 2.4rem;
+	background: #060606;
+	color: #ffffff;
+	font-family: "CircularStdBlack", sans-serif;
+	border: 1px solid #060606;
+	box-shadow: rgba(6, 6, 6, 0.3) 0px 0px 19px;
+	border-radius: 45px;
+	transition: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-brand-w, #omni-application-submit-btn {
+		transition: none;
+	}
+}
+
+.btn-brand-w:hover, #omni-application-submit-btn:hover {
+	color: #ffffff;
+	box-shadow: rgba(6, 6, 6, 0.7) 0px 0px 25px;
+}
+
+.btn-brand-hollow {
+	color: #060606;
+	font-family: "CircularStdBlack", sans-serif;
+	padding-bottom: 0.3rem;
+	transition: 0.3s;
+	display: inline-block;
+	position: relative;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-brand-hollow {
+		transition: none;
+	}
+}
+
+.btn-brand-hollow::before {
+	bottom: 0;
+	display: block;
+	height: 3px;
+	width: 0%;
+	content: "";
+	background-color: #060606;
+	position: absolute;
+	transition: 0.3s;
+	left: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.btn-brand-hollow::before {
+		transition: none;
+	}
+}
+
+.btn-brand-hollow:hover {
+	color: #060606;
+}
+
+.btn-brand-hollow:hover::before {
+	opacity: 1;
+	width: 100%;
+	left: 0;
+}
+
+/**Common style**/
+.section-title {
+	line-height: 1.4;
+}
+#page{
+	overflow: hidden;
+	position: relative;
+  	display: flex;
+	flex-direction: column;
+	min-height: 100vh;  
+}
+
+
+/**Header**/
+.site-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding-top: 30px;
+	padding-bottom: 20px;
+	/**Menu Modal**/
+}
+
+a.brand-logo {
+	color: #060606;
+	font-family: "CircularStdBlack", sans-serif;
+	text-transform: uppercase;
+	text-decoration: none;
+}
+
+.brand-logo img {
+	margin-right: 0.5rem;
+	vertical-align: bottom;
+}
+.main-navigation .nav{
+	align-items: center;
+}
+.main-navigation .nav .menu-item {
+	margin: 0 1rem;
+}
+
+.main-navigation .nav .menu-item a {
+	color: #060606;
+	font-family: "CircularStdBold", sans-serif;
+	font-size: 0.875rem;
+	position: relative;
+	padding-bottom: 0.3rem;
+	transition: 0.3s;
+	text-decoration: none;
+	display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.main-navigation .nav .menu-item a {
+		transition: none;
+	}
+}
+
+.main-navigation .nav .menu-item a::after {
+	bottom: 0;
+	display: block;
+	height: 3px;
+	width: 0%;
+	content: "";
+	background-color: #0099FF;
+	position: absolute;
+	transition: 0.3s;
+	left: 50%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.main-navigation .nav .menu-item a::after {
+		transition: none;
+	}
+}
+
+.main-navigation .nav .menu-item a:hover::after, .main-navigation .nav .menu-item.current-menu-item a::after {
+	opacity: 1;
+	width: 100%;
+	left: 0;
+}
+
+.main-navigation .nav .external {
+	position: relative;
+}
+
+.main-navigation .nav .external a::before {
+	content: url("/images/arrow-external.svg");
+	vertical-align: middle;
+	position: absolute;
+	right: -7px;
+	top: -7px;
+}
+
+@media (min-width: 992px) {
+	.main-navigation .nav .external-first {
+		margin-left: 1.5rem;
+	}
+	.main-navigation .nav .external-first::before {
+		content: '|';
+		position: absolute;
+		margin-left: -1.5rem;
+		color: #979797;
+	}
+}
+
+.main-navigation .nav .down-btn {
+	margin: 0 0.875rem;
+}
+
+.main-navigation .nav .down-btn a {
+	padding: 12px 24px;
+	background: #0099FF;
+	border-radius: 28px;
+	color: #060606;
+	border: 1px solid #0099FF;
+	box-shadow: rgba(147,211,255, 0.3) 0px 0px 19px;
+	line-height: 1.3;
+}
+
+.main-navigation .nav .down-btn a::after {
+	display: none;
+}
+
+.main-navigation .nav .down-btn a::before {
+	content: "";
+	background: url("../images/umbraco_logo.png") no-repeat;
+	width: 18px;
+	height: 19px;
+	vertical-align: middle;
+	margin-right: 0.5rem;
+	display: inline-block;
+}
+
+.main-navigation .nav .down-btn a:hover {
+	color: #060606;
+	box-shadow: rgba(0,153,255, 0.3) 0px 0px 25px;
+}
+
+.nav-toggle,.mobile-navigation {
+	  display: none;
+	}
+	
+@media (max-width:991px){
+	.nav-toggle {
+	  display: block;
+	  position: relative;
+	  width: 30px;
+	  height: 18px;
+	  cursor: pointer;
+	  z-index: 10001;
+	}
+	.nav-toggle span {
+	  position: absolute;
+	  width: 100%;
+	  height: 2px;
+	  background: #060606;
+	  top: 0;
+	  left: 0;
+	  transition: all 0.4s ease;
+	}
+	.nav-toggle:hover span{
+		background: #6cfae4;
+	}
+
+	.nav-toggle span:nth-child(2) {
+	  top: 8px;
+	}
+
+	.nav-toggle span:nth-child(3) {
+	  top: 16px;
+	}
+	.nav-toggle.on span{
+		background: #fff;
+	}
+	.nav-toggle.on:hover span{
+		background: #6cfae4;
+	}
+	.nav-toggle.on span:nth-child(1) {
+	  transform: rotate(-45deg);
+	  top: 8px;
+	}
+
+	.nav-toggle.on span:nth-child(3) {
+	  transform: rotate(45deg);
+	  top: 8px;
+	}
+
+	.nav-toggle.on span:nth-child(2) {
+	  opacity: 0;
+	  left: 5px;
+	}
+
+	.nav-on {
+	  height: 100%;
+	  overflow: hidden;
+	}
+
+	.mobile-navigation {
+	    position: fixed;
+	    left: 0;
+	    bottom: 0;
+	    height:100vh;
+	    width: 100%;
+	    background: rgba(15, 15, 15, 0.95);
+	    padding: 30px 20px;
+	    display: block;
+	    opacity: 0;
+	    visibility: hidden;
+	    z-index: 10000;
+	    transition: background-color .5s ease-in-out,color .5s ease-in-out;
+	    transition: all 0.4s ease;
+	}
+	.nav-on .mobile-navigation {
+		opacity: 1;
+	    visibility: visible;
+	    transition: all 0.4s ease;
+	}
+	.mobile-navigation nav {
+	  height: 100%;
+	  display: -ms-flexbox;
+	  display: flex;
+	  -ms-flex-align: center;
+	      align-items: center;
+	  -ms-flex-pack: center;
+	      justify-content: center;
+	  overflow: auto;
+	  text-align: center;
+	}
+
+	.mobile-navigation nav ul {
+	  list-style: none;
+	  padding: 0;
+	  margin: 0;
+	  transition: all 0.3s ease;
+	  transform: translateY(50px);
+	  opacity: 0;
+	}
+
+	.nav-on .mobile-navigation nav ul {
+	  transform: none;
+	  transition-delay: 0.3s;
+	  opacity: 1;
+	}
+	.mobile-navigation nav li{
+		margin-bottom: 1.5rem;
+	}
+
+	.mobile-navigation nav  a {
+	  color: #ffffff;
+		font-weight: 400;
+		font-family: "CircularStdBold", sans-serif;
+		font-size: 1.25rem;
+		transition: 0.4s;
+		display: inline-block;
+		position: relative;
+		text-decoration: none;
+	}
+	.mobile-navigation nav  a:hover{
+		color: #6cfae4;
+	}
+	.mobile-navigation nav .external a::before{
+		content: url("../images/arrow-external-white.svg");
+		vertical-align: middle;
+		position: absolute;
+		right: -7px;
+		top: -9px;
+	}
+	.mobile-navigation nav .down-btn a{
+		padding: 12px 24px;
+		background: #0099FF;
+		border-radius: 28px;
+		color: #060606;
+		border: 1px solid #0099FF;
+		box-shadow: rgba(147,211,255, 0.3) 0px 0px 19px;
+		line-height: 1.3;
+	}
+	.mobile-navigation nav .down-btn a::before{
+		content: "";
+		background: url("../images/umbraco_logo.png") no-repeat;
+		width: 18px;
+		height: 19px;
+		vertical-align: middle;
+		margin-right: 0.5rem;
+		display: inline-block;
+	}
+}
+.page-title{
+	text-align: center;
+	margin: 0 0 30px;
+}
+.entry-title{
+	margin: 0 0 30px;
+}
+
+
+
+
+.site-footer {	
+	margin-top: auto;
+}
+
+
+.footer-top {
+	
+	border-top: 1px solid #E7E6E6;
+	padding: 26px 0;
+}
+
+.brand-footer {
+	font-size: 1.125rem;
+	font-family: "CircularStdBlack", sans-serif;
+}
+
+
+.brand-footer img {
+	margin-right: 0.5rem;
+	vertical-align: bottom;
+}
+
+.footer-top .rights {
+	margin-bottom: 0;
+	color: #515151;
+	font-size: 0.8125rem;
+}
+
+.footer-top .rights a {
+	margin-left: 0.5rem;
+	font-size: 1.125rem;
+	color: #060606;
+	transition: 0.3s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.footer-top .rights a {
+		transition: none;
+	}
+}
+
+.footer-top .rights a:hover {
+	color: #5b3be8;
+}
+
+
+
+
+
+/**Error Pages**/
+.error-404 .page-header {
+	max-width: 550px;
+	margin: 0 auto;
+	margin-bottom: 2.5rem;
+}
+
+.error-404 .page-header .page-title {
+	font-size: 6rem;
+}
+
+@media (max-width: 1200px) {
+	.error-404 .page-header .page-title {
+		font-size: calc(1.725rem + 5.7vw) ;
+	}
+}
+
+.error-404 .page-content {
+	font-size: 1.25rem;
+	max-width: 650px;
+	margin: 0 auto;
+}
+.omni-job-form-control, .omni-filter-option{
+	border: 1px solid #E7E6E6;
+	transition: all 0.3s ease;
+	height: 46px;
+	padding: 10px;
+	border-radius: 0;
+	appearance: none;
+}
+.omni-job-form-control:focus, .omni-filter-option:focus{
+	border-color: #060606;
+	outline: none;
+	box-shadow: none;
+}

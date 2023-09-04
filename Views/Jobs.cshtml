@@ -1,0 +1,10 @@
+﻿@using ContentModels = Umbraco.Cms.Web.Common.PublishedModels
+@using UmbracoCareer.Models
+@inherits Umbraco.Cms.Web.Common.Views.UmbracoViewPage<ContentModels.Jobs>
+
+@{
+    Layout = "Master.cshtml";
+}
+
+
+@await Component.InvokeAsync("Jobs",new JobListViewModel { ListView = Model.ListView, NumPerPage = Model.NumberOfJobsPerPage})

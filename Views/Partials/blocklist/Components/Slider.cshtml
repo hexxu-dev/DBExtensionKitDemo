@@ -1,0 +1,78 @@
+﻿@inherits UmbracoViewPage<Umbraco.Cms.Core.Models.Blocks.BlockListItem>
+
+@{
+	var content =(Slider)Model.Content;
+	
+
+}
+
+		<section class="section color_scheme_11 layout_wide vertical_align_top">
+							<div class="port">
+								<div class="cell">
+									<div class="cell_inner">
+										<div class="row_wrapper">
+											<div class="row">
+												<div class="column col-md-8 col-ms-12 align_center vertical_align_middle animation_fade_in animate padding_normal column_background_image"
+													 style="background-color: rgba(0, 153, 255, 1);background-image:url(@content.Image.Url());"
+													 data-width="8">
+													<div class="column_content">
+														<div class="separator top_spacing_large bottom_spacing_large border_style_none">
+														</div>
+														<header class="headline color_scheme_1 dash_none size_huge align_inherit"
+																style="text-shadow: 0 5px 10px rgba(0, 53, 82, 0.5);">
+															<h2>
+																<span class="headline_content">
+																	<span>
+																		@content.Title
+																	</span>
+																</span>
+															</h2>
+														</header>
+														<div class="separator top_spacing_large bottom_spacing_large border_style_none">
+														</div>
+													</div>
+												</div>
+												<div class="column col-md-4 col-ms-12 align_center vertical_align_middle animation_fade_in animate padding_double triangle_left"
+													 style="background-color: rgba(239, 239, 239, 1);" data-width="4">
+													<div class="column_content">
+														<div class="separator bottom_spacing_large border_style_none">
+														</div>
+														<div class="content_slider sliderDots gap_no_gap arrows_size_no_arrows show_dots_below height_auto animation_slide">
+															<div class="slick-slider"
+																 data-slick='{ "lazyLoad": "progressive", "cssEase": "ease-out", "speed": "600", "arrows": false, "adaptiveHeight": true, "dots": true,"autoplay": true, "autoplaySpeed": 2000}'>
+																@foreach (var slide in content.Slides)
+																{
+												var item = (AboutUsSlideItem)slide.Content;
+											<div class="content_slider_item" style="">
+																		<div class="content_slider_item_content content">
+																			<div class="service color_scheme_6 style_filled size_normal hape_circle align_inherit"
+																			 style="pointer-events: none !important;">
+																				<div class="service_content">
+																					<span data-ico-essential="&#xe99b;"
+																					  class="icon_holder"></span>
+																					<div class="service_content_title">
+																						@item.SlideTitle
+																					</div>
+																				</div>
+																				<div class="service_content_text">
+																					@Html.ReplaceLineBreaks(item.SlideContent)
+																				</div>
+																			</div>
+																		</div>
+																	</div>
+																}
+
+															</div>
+														</div>
+														<div class="separator bottom_spacing_large border_style_none">
+														</div>
+													</div>
+													<div class="column_triangle_box"
+														 style="border-color: rgba(239, 239, 239, 1);"></div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</section>

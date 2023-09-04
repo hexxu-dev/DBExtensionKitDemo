@@ -1,0 +1,205 @@
+﻿@using UmbracoCareer.Models
+@using UmbracoCareer.Controllers
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+@model JobViewModel
+
+@{
+    var success = HttpContextAccessor.HttpContext.Request.Query["success"];
+    var msgDisplay = success == "1" ? "block" : "none";
+}
+<main id="primary" class="site-main">
+    <section class="section content-page">
+        <div class="container">
+            <article>
+                <h1 class="entry-title">@Model.Job.Title</h1>
+                <div class="entry-content">
+                    <div class="omni-job-single-wrap omni-job-form-plugin-style omni-col-2">
+
+                        <div class="omni-job-content">
+
+                            <div class="omni-job-entry-content entry-content">
+
+                                <h3>Job brief</h3>
+
+                                @Html.Raw(Model.Job.Description)
+
+                                <h3>Requirements</h3>
+
+                                @Html.Raw(Model.Job.Requirements)
+                            </div><!-- .omni-job-entry-content -->
+
+                            <div class="omni-job-specifications-container">
+                                <div class="omni-job-specifications-row">
+                                    <div class="omni-job-specification-wrapper">
+                                        <div class="omni-job-specification-item ">
+                                            <i class="omni-job-icon-clock-o"></i>
+                                            <span class="omni-job-specification-label"><strong> Job Categories: </strong></span>@Model.Job.JobCategory
+                                        </div>
+                                        <div class="omni-job-specification-item">
+                                            <i class="omni-job-icon-suitcase"></i><span class="omni-job-specification-label"><strong> Job Types: </strong></span>@Model.Job.JobType
+                                        </div>
+                                        <div class="omni-job-specification-item">
+                                            <i class="omni-job-icon-map-marker"></i><span class="omni-job-specification-label"><strong> Job Locations: </strong></span>@Model.Job.JobLocation
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div><!-- .omni-job-content -->
+
+                        <div class="omni-job-form">
+
+                            <div class="omni-job-form-inner">
+                                @{
+                                    if (Model.IsExpired)
+                                    {
+                                        <p>Sorry! This job has expired.</p>
+                                    }
+                                    else
+                                    {
+                                        <h2>
+                                            Apply for this job
+                                        </h2>
+
+                                        <div class="omni-job-form-description">
+                                            <p>Use the form below to submit your job application</p>
+                                        </div>
+                                        @using (Html.BeginUmbracoForm<JobController>(nameof(JobController.Apply), null, new { @class = "omni-application-form", id="application-form" }))
+                                        {
+                                            <input type="hidden" asp-for="Application.JobId" />
+                                            <input type="hidden" asp-for="Application.MediaId" id="mediaId"/>
+                                            <div class="omni-job-form-group omni-job-form-text-group">
+                                                <label>Full name <span class="omni-job-form-error">*</span></label>
+                                                <input class="omni-job-form-field omni-job-form-control" asp-for="Application.Name" required  data-msg-required="This field is required." />
+                                            </div>
+                                            <div class="omni-job-form-group omni-job-form-text-group">
+                                                <label>Email <span class="omni-job-form-error">*</span></label>
+                                                <input class="omni-job-form-field omni-job-form-control" asp-for="Application.Email" type="email" required data-msg-required="This field is required." />
+                                            </div>
+                                            <div class="omni-job-form-group omni-job-form-tel-group">
+                                                <div class="omni-job-form-iti-wrapper" data-default-country="US">
+                                                    <label for="omni_tel_1">Phone</label>
+                                                    <input id="omni_tel_1" type="tel" placeholder="" class="omni-job-form-control" asp-for="Application.Phone" />
+                                                </div>
+                                            </div>
+                                            <div class="omni-job-form-group omni-job-form-text-group">
+                                                <label>Cover Letter <span class="omni-job-form-error">*</span></label>
+                                                <textarea class="omni-job-form-field omni-job-form-control" asp-for="Application.CoverLetter" required data-msg-required="This field is required."></textarea>
+                                            </div>
+                                            <div class="omni-job-form-group omni-job-form-file-group">
+                                                <label>Upload CV/Resume  <span class="omni-job-form-error">*</span></label>
+                                                <div class="omni-form-drag-and-drop-file-control dropzone" id="omni-jobs-dropzone">
+                                                    <div class="dz-message">
+                                                        <span class="omni-form-drag-and-drop-file-title">Drop files here or click to upload</span>
+                                                        <span class="omni-form-drag-and-drop-file-description">Maximum allowed file size is 2 MB.</span>
+                                                    </div>
+                                                </div>
+                                                <small>Allowed Type(s): .pdf, .doc, .docx</small>
+                                            </div>
+
+                                            <div class="omni-job-form-group omni-job-inline-group"><input name="omni_form_privacy_policy" class="omni-job-form-field" id="omni_form_privacy_policy" value="yes" type="checkbox"  required><label for="omni_form_privacy_policy">By using this form you agree with the storage and handling of your data by this website. <span class="omni-job-form-error">*</span></label>
+                                              <br><label for="omni_form_privacy_policy" class="error"></label>
+                                            </div>
+
+                                            <div class="omni-job-form-group">
+                                                <input type="submit" class="omni-application-submit-btn" name="Submit" value="Submit" id="submit" />
+                                            </div>
+
+                                        }
+
+                                        <div class="omni-application-message omni-success-message" id="successMsg" style="display:@msgDisplay">Your application has been submitted.</div>
+                                    }
+                                }
+                            </div><!-- .omni-job-form-inner -->
+                        </div><!-- .omni-job-form -->
+                        <div class="omni-jobs-pro-listings-link-container"><a href="/developers-tutorials/careers-tutorial/careers-list/" class="omni-jobs-pro-listings-link">Back to listings</a></div>
+
+                    </div>
+                </div><!-- .entry-content -->
+
+            </article>
+
+        </div>
+    </section>
+</main><!-- #main -->
+<script>
+    $(document).ready(function () {
+        $("#application-form").validate();
+    });
+
+    var input = document.querySelector("#omni_tel_1");
+    window.intlTelInput(input, {
+        initialCountry: "auto",
+        geoIpLookup: callback => {
+            fetch("https://ipapi.co/json")
+                .then(res => res.json())
+                .then(data => callback(data.country_code))
+                .catch(() => callback("us"));
+        },
+        utilsScript: "/plugins/intl-tel-input/js/utils.js",
+        separateDialCode: true,
+        nationalMode: false,
+    });
+</script>
+<script>
+    Dropzone.options.omniJobsDropzone = { // camelized version of the `id`,
+        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+        url:"/umbraco/surface/job/upload",
+        method:"post",
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: 2, // MB
+        createImageThumbnails: false,
+        acceptedFiles: "application/pdf,.docx,.doc",
+        addRemoveLinks: true,
+        dictDefaultMessage: "Drop files here or click to upload",
+        dictFileTooBig: "File is too big ({{filesize}}MiB). Max filesize: {{maxFilesize}}MiB.",
+        dictInvalidFileType: "You can't upload files of this type.",
+        success(file, response) {
+           $("#mediaId").val(response);
+            if (file.previewElement) {
+                return file.previewElement.classList.add("dz-success");
+            }
+        },
+        error(file, message) {
+            if (file.previewElement) {
+                file.previewElement.classList.add("dz-error");
+                if (typeof message !== "string" && message.error) {
+                    message = message.error;
+                }
+                for (let node of file.previewElement.querySelectorAll(
+                    "[data-dz-errormessage]"
+                )) {
+                    node.textContent = message;
+                }
+            }
+        },
+        fallback() {
+            let messageElement;
+            this.element.className = `${this.element.className} dz-browser-not-supported`;
+
+            for (let child of this.element.getElementsByTagName("div")) {
+                if (/(^| )dz-message($| )/.test(child.className)) {
+                    messageElement = child;
+                    child.className = "dz-message"; // Removes the 'dz-default' class
+                    break;
+                }
+            }
+            if (!messageElement) {
+                messageElement = Dropzone.createElement(
+                    '<div class="dz-message"><span></span></div>'
+                );
+                this.element.appendChild(messageElement);
+            }
+
+            let span = messageElement.getElementsByTagName("span")[0];
+            if (span) {
+                if (span.textContent != null) {
+                    span.textContent = this.options.dictFallbackMessage;
+                } else if (span.innerText != null) {
+                    span.innerText = this.options.dictFallbackMessage;
+                }
+            }
+
+            return this.element.appendChild(this.getFallbackForm());
+        },
+    };
+</script>

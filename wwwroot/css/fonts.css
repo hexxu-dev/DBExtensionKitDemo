@@ -1,0 +1,32 @@
+@font-face {
+	font-family: "CircularStd";
+	src: url("../fonts/CircularStdBook.eot");
+	/* IE9*/
+	src: url("../fonts/CircularStdBookd41d.eot?#iefix") format("embedded-opentype"), url("../fonts/CircularStdBook.woff2") format("woff2"), url("../fonts/CircularStdBook.woff") format("woff"), url("../fonts/CircularStdBook.ttf") format("truetype"), url("../fonts/CircularStdBook.svg#Circular Std Book") format("svg");
+	/* iOS 4.1- */
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "CircularStdBlack";
+	src: url("../fonts/CircularStdBlack.eot");
+	/* IE9*/
+	src: url("../fonts/CircularStdBlackd41d.eot?#iefix") format("embedded-opentype"), url("../fonts/CircularStdBlack.woff2") format("woff2"), url("../fonts/CircularStdBlack.woff") format("woff"), url("../fonts/CircularStdBlack.ttf") format("truetype"), url("../fonts/CircularStdBlack.svg#Circular Std Black") format("svg");
+	/* iOS 4.1- */
+	font-style: normal;
+	font-weight: normal;
+	font-display: swap;
+}
+
+@font-face {
+	font-family: "CircularStdBold";
+	src: url("../fonts/CircularStdBold.eot");
+	/* IE9*/
+	src: url("../fonts/CircularStdBoldd41d.eot?#iefix") format("embedded-opentype"), url("../fonts/CircularStdBold.woff2") format("woff2"), url("../fonts/CircularStdBold.woff") format("woff"), url("../fonts/CircularStdBold.ttf") format("truetype"), url("../fonts/CircularStdBold.svg#Circular Std Bold") format("svg");
+	/* iOS 4.1- */
+	font-style: normal;
+	font-weight: bold;
+	font-display: swap;
+}
